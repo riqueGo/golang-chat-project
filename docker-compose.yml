@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  gochat:
+    container_name: gochat
+    build:
+      dockerfile: ./docker/gochat.dockerfile
+      context: ./
+    ports:
+      - "8080:8080"
+    networks:
+      - back-tier
+
+  node:
+    container_name: react-chat
+    build:
+      dockerfile: ./docker/node.dockerfile
+      context: ./
+    ports:
+      - "3000:3000"
+    networks:
+      - front-tier
+      - back-tier
+
+networks:
+  front-tier:
+  back-tier:
